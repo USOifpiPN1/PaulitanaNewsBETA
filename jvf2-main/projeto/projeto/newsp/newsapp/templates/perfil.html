@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página de Perfil</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Custom styles */
+        .profile-banner {
+            background-color: #f8d7da; /* Light red background for the banner */
+            border: 2px solid #dc3545; /* Reddish border */
+            padding: 40px;
+            margin-top: 20px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start; /* Align items to the start */
+        }
+
+        .profile-image {
+            width: 150px; /* Larger image size */
+            height: 150px;
+            border-radius: 50%;
+            border: 5px solid #dc3545; /* Reddish border */
+            object-fit: cover;
+            margin-right: 30px; /* More space between image and text */
+        }
+
+        .profile-info {
+            text-align: center; /* Center text horizontally */
+        }
+
+        .profile-info h1 {
+            margin-top: 0;
+        }
+
+        .comments-section {
+            border: 2px solid #dc3545; /* Reddish border */
+            padding: 20px;
+            margin: 20px auto;
+            width: 90%;
+            border-radius: 8px;
+            background-color: #f8d7da; /* Light red background for the comments section */
+        }
+
+        .comments-title {
+            text-align: center; /* Center align the title */
+            color: #dc3545; /* Reddish color */
+            margin-top: 20px; /* Space above the title */
+            margin-bottom: 20px; /* Space below the title */
+        }
+
+        .comment {
+            border-bottom: 1px solid #dc3545; /* Reddish border */
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+        }
+
+        .comment:last-child {
+            border-bottom: none;
+        }
+
+        .comment-info {
+            font-weight: bold;
+            color: #dc3545;
+        }
+
+        .comment-content {
+            margin-left: 20px; /* Indentation for the comment content */
+            color: #333; /* Color for the comment text */
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-danger">
+        <div class="container">
+            <a class="navbar-brand" href="/">Paulistana News</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'all-news' %}">Todas as notícias</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'all-category' %}">Categorias</a>
+                    </li>
+                    <li class="navbar-nav nav-item">
+                        <a class="nav-link" href="{% url 'done' %}">Perfil</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Profile Banner -->
+    <div class="profile-banner container">
+        <img src="https://via.placeholder.com/150" alt="Imagem do Perfil" class="profile-image">
+        <div class="profile-info">
+            <h1>John Doe</h1>
+        </div>
+    </div>
+
+    <!-- Comments Section -->
+    <div class="container">
+        <h2 class="comments-title">Comentários</h2>
+        <div class="comments-section">
+            {% for comment in comments %}
+                <div class="comment">
+                    <div class="comment-info">
+                        {{ comment.username }} - {{ comment.comment_date|date:"d/m/Y H:i" }}
+                    </div>
+                    <p class="comment-content">{{ comment.content }}</p>
+                </div>
+            {% empty %}
+                <p>Nenhum comentário ainda.</p>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
